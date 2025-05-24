@@ -1,0 +1,39 @@
+/* Estilos generales */
+body {
+  background-color: #000;
+  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Enlaces */
+a,
+.nav-link {
+  color: #fff;
+  transition: color 0.3s ease;
+}
+
+a:hover,
+.nav-link:hover {
+  color: #ff1e1e;
+}
+
+/* Títulos */
+h1, h2, h3, h4, h5 {
+  color: #ff1e1e;
+}
+
+/* Botones */
+.btn-primary {
+  background-color: #ff1e1e;
+  border: none;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #e60000;
+  box-shadow: 0 0 10px rgba(255, 30, 30, 0.7);
+  outline: none;
+}
