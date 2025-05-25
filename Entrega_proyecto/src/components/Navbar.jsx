@@ -1,10 +1,21 @@
 import React from 'react';
 
-function Navbar({ cartCount, onCartClick }) {
+function Navbar({ cartCount, onCartClick, onLoginClick }) {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-4">
       <a className="navbar-brand" href="#">Tienda React</a>
-      <div className="ms-auto d-flex align-items-center">
+
+      <div className="ms-auto d-flex align-items-center gap-2">
+        {/* Botón de Iniciar sesión */}
+        <button 
+          className="btn btn-outline-light me-2" 
+          onClick={onLoginClick}
+          aria-label="Iniciar sesión"
+        >
+          Iniciar Sesión
+        </button>
+
+        {/* Botón de carrito */}
         <button 
           className="btn btn-outline-light position-relative" 
           onClick={onCartClick}

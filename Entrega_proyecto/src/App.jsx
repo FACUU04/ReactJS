@@ -2,13 +2,16 @@ import React, { useEffect, useState } from 'react';
 import ProductList from './components/ProductList.jsx';
 import Navbar from './components/Navbar.jsx';
 import Cart from './components/Cart.jsx';
-import Footer from './components/Footer.jsx'; // importamos el footer
-import './App.css'; // importamos los estilos
+import Footer from './components/Footer.jsx';
+import LoginModal from './components/LoginModal.jsx';
+import './App.css';
 
 function App() {
   const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     fetch('https://fakestoreapi.com/products')
@@ -36,20 +39,16 @@ function App() {
     setCartItems(prev => prev.filter(item => item.id !== id));
   };
 
-  const toggleCart = () => setIsCartOpen(prev => !prev);
-
   return (
     <div className="app-container">
       <Navbar
         cartCount={cartItems.reduce((sum, item) => sum + item.quantity, 0)}
-        onCartClick={toggleCart}
+        onCartClick={() => setIsCartOpen(prev => !prev)}
+        onLoginClick={() => setIsLoginOpen(true)}
       />
 
       <main className="main-content">
-        <ProductList
-          products={products}
-          onAddToCart={(product) => handleAddToCart(product)}
-        />
+        <ProductList products={products} onAddToCart={handleAddToCart} />
 
         {isCartOpen && (
           <div className="cart-overlay">
@@ -57,11 +56,19 @@ function App() {
               cartItems={cartItems}
               onRemoveFromCart={handleRemoveFromCart}
               onAddToCart={handleAddToCart}
-              onClose={toggleCart}
+              onClose={() => setIsCartOpen(false)}
             />
           </div>
         )}
       </main>
+
+      {isLoginOpen && (
+        <LoginModal
+          isOpen={isLoginOpen} // ✅ ahora sí se pasa correctamente
+          onClose={() => setIsLoginOpen(false)}
+          onLogin={(loggedUser) => setUser(loggedUser)}
+        />
+      )}
 
       <Footer />
     </div>
